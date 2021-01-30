@@ -17,7 +17,7 @@ myFunction();
 
 //🚀🚀🚀 ⬇️ 📝 Explanation ⬇️ 📝 🚀🚀🚀: 
 
-
+//because of scope, variables can be passed into a funtion but they cannot be passed back up.
 
 
 
@@ -28,9 +28,17 @@ myFunction();
     
 For example, `summation(4)` should return 10 because 1+2+3+4 is 10. Note, you may use a for loop for this function if you wish */
 
-function summation(/*Your Code Here*/) {
-  /*Your Code Here*/
-
+function summation(num) {
+  let counter = 1;
+  let numArray = [];
+  while(counter <= num){
+    numArray.push(counter);
+    counter++;
+  }
+  const finalNum = numArray.reduce((accumulator, currentValue) =>{
+    return accumulator + currentValue;
+  });
+  return finalNum;
   }
  
 
@@ -56,8 +64,11 @@ const zooAnimals = [
   displayNames will be an array of strings, and each string should follow this pattern: "name: {name}, scientific: {scientific name}"
   */
 
-  function animalNames(/*Your Code Here*/){
-    /*Your Code Here*/
+  function animalNames(zooAnimals){
+    const displayNames = zooAnimals.map(element =>{
+      return `name: ${element.animal_name}, scientific: ${element.scientific_name}`;
+    });
+    return displayNames;
   }
   
 
@@ -67,8 +78,11 @@ const zooAnimals = [
   For example: ['jackal, asiatic', .....]
   */
 
-  function lowerCaseNames(/*Your Code Here*/){
-    /*Your Code Here*/
+  function lowerCaseNames(zooAnimals){
+   const lowerCaseNames = zooAnimals.map(element => {
+    return element.animal_name.toLowerCase();
+   });
+   return lowerCaseNames;
   }
   
   
@@ -77,8 +91,13 @@ const zooAnimals = [
   Using lowPopulationAnimals use .filter() to create a new array of objects which contains only the animals with a population of less than 5.
   */
 
-  function lowPopulationAnimals(/*Your Code Here*/){
-    /*Your Code Here*/
+  function lowPopulationAnimals(zooAnimals){
+    let lowPopulationAnimalsArr = zooAnimals.filter(element =>{
+      if(element.population < 5){
+        return element;
+      };
+    });
+    return lowPopulationAnimalsArr;
   }
   
 
@@ -87,9 +106,23 @@ const zooAnimals = [
   Using USApop find the total population from the zoos array using the .reduce() method. 
   Remember the reduce method takes two arguments: a callback (which itself takes two args - the accumulator and the item), and an initial value for the count.
   */
+//  while(counter <= num){
+//   numArray.push(counter);
+//   counter++;
+// }
+// const finalNum = numArray.reduce((accumulator, currentValue) =>{
+//   return accumulator + currentValue;
+// });
+// return finalNum;
 
-  function USApop(/*Your Code Here*/){
-    /*Your Code Here*/
+  function USApop(zooAnimals){
+  const totalAnimalPopulationArr = zooAnimals.map(element => {
+      return element.population;
+  });
+  const totalAnimalPopulation = totalAnimalPopulationArr.reduce((accumulator, currentValue)=>{
+    return accumulator + currentValue;
+  });
+    return totalAnimalPopulation;
   }
   
   
@@ -101,35 +134,35 @@ const zooAnimals = [
     * The consume function should return the invocation of cb, passing a and b into cb as arguments
   */
 
-  function consume(/*Your Code Here */){
-    /*Your Code Here */
+  function consume(a, b, cb){
+    return cb(a,b);
   }
  
   
   /* 🦁🦁🦁 Step 2: Create several functions to callback with consume(); 🦁🦁🦁 */
  // 🦁🦁🦁 Use add to return the sum of two numbers 🦁🦁🦁
   
-function add(/*Your Code Here */){
-    /*Your Code Here*/
+function add(a,b){
+    return a + b;
   }
 
 // 🦁🦁🦁 Use multiply to return the product of two numbers 🦁🦁🦁
   
-function multiply(/*Your Code Here */){
-   /*Your Code Here */
+function multiply(a,b){
+   return a * b;
   }
 
  // 🦁🦁🦁 Use greeting to accept a first and last name and return "Hello {first-name} {last-name}, nice to meet you!" 🦁🦁🦁
   
-function greeting(/*Your Code Here */){
-   return /*Your Code Here */
+function greeting(firstName, lastName){
+   return `Hello ${firstName} ${lastName}, nice to meet you!`
   }
   
   // 🦁🦁🦁 Step 3: Check your work by un-commenting the following calls to consume(): 🦁🦁🦁 
   // ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️
-  // console.log(consume(2, 2, add)); // 4
-  // console.log(consume(10, 16, multiply)); // 160
-  // console.log(consume("Mary", "Poppins", greeting)); // Hello Mary Poppins, nice to meet you!
+  console.log(consume(2, 2, add)); // 4
+  console.log(consume(10, 16, multiply)); // 160
+  console.log(consume("Mary", "Poppins", greeting)); // Hello Mary Poppins, nice to meet you!
   
   
 // 🦁💪 Stretch: If you haven't already, convert your array method callbacks into arrow functions - make sure you comment out this section before you submit your work 🦁💪
